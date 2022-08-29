@@ -1,21 +1,17 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
-  addRecipe,
-  deleteRecipe,
-  getAllRecipes,
-  getRecipesById,
-  updateRecipe,
-} from "../controllers/recipes.controller";
+	addRecipe,
+	deleteRecipe,
+	getAll,
+	getOne,
+	updateRecipe,
+} from '../controllers/recipes.controller';
 const router = Router();
 
-router.post("/", addRecipe);
-
-router.get("/", getAllRecipes);
-
-router.get("/:id", getRecipesById);
-
-router.patch("/update/:id", updateRecipe);
-
-router.delete("/delete/:id", deleteRecipe);
+router.post('/', addRecipe);
+router.get('/', getAll);
+router.get('/:id', getOne);
+router.patch('/update/:id', updateRecipe);
+router.delete('/delete/:id', deleteRecipe);
 
 export default router;

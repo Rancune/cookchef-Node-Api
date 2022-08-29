@@ -2,15 +2,16 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    //database Name
-    const databaseName = process.env.DATABASE_NAME;
-    const url = process.env.DATABASE_URL_LOCAL;
-    console.log(url + databaseName);
-    const con = await mongoose.connect(url + databaseName, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    mongoose.connect("mongodb://localhost:27017/", {
+      user: process.env.MONGO_USERNAME,
+      pass: process.env.MONGO_ROOTPASSWORD,
+      dbName: process.env.DATABASE_NAME,
+      // authSource: process.env.MONGO_DB_AUTH_SOURCE,
+      // authMechanism: process.env.MONGO_DB_AUTH_MECHANISM,
+      maxPoolSize: 10, // Maintain up to 10 socket connections
+      // serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+      // socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     });
-    console.log(`Database connected : ${con.connection.host}`);
   } catch (error) {
     console.error(`Error: ${error.message}`);
     process.exit(1);
